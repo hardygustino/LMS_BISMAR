@@ -215,7 +215,7 @@ class BranchController extends Controller
         ]); } catch (\Throwable) {}
 
         return response()->json([
-            'message' => 'Cabang berhasil diupdate.',
+            'message' => 'Cabang berhasil diperbarui.',
             'cabang'  => $cabang,
         ]);
     }

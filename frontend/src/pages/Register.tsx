@@ -186,7 +186,7 @@ export default function Register() {
         </div>
 
         <p className="relative text-slate-600 text-xs fade-in delay-2">
-          © 2025 PT Indo Bismar Education. All rights reserved.
+          © 2025 PT Indo Bismar Education. Hak cipta dilindungi.
         </p>
       </div>
 

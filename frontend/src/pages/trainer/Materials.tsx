@@ -146,7 +146,7 @@ export default function Materials() {
       const res = await getMaterials(courseId);
       setMaterials(res.data.data ?? []);
     } catch {
-      setPageError('Gagal memuat materi. Coba refresh halaman.');
+      setPageError('Gagal memuat materi. Coba muat ulang halaman.');
       setMaterials([]);
     } finally {
       setPageLoading(false);
@@ -267,7 +267,7 @@ export default function Materials() {
             <ArrowLeft size={20} className="text-gray-500 dark:text-gray-400" />
           </Link>
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Materi Course</h1>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Materi Kursus</h1>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-0.5">{materials.length} materi</p>
           </div>
         </div>
@@ -294,7 +294,7 @@ export default function Materials() {
       ) : materials.length === 0 ? (
         <div className={`bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/8 rounded-2xl p-16 text-center`}>
           <FileText size={40} className="mx-auto mb-3 text-gray-400 dark:text-gray-500" />
-          <p className="text-gray-500 dark:text-gray-400">Belum ada materi untuk course ini.</p>
+          <p className="text-gray-500 dark:text-gray-400">Belum ada materi untuk kursus ini.</p>
         </div>
       ) : (() => {
         // Group materi by sub_bab

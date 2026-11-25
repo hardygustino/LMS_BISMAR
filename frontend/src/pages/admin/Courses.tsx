@@ -342,7 +342,7 @@ export function Courses() {
 
   const handleUnenroll = async (pesertaId: number, nama: string) => {
     if (!selectedCourse) return;
-    if (!await confirm(`Keluarkan "${nama}" dari course ini?`)) return;
+    if (!await confirm(`Keluarkan "${nama}" dari kursus ini?`)) return;
     try {
       await api.unenrollPeserta(selectedCourse.id, pesertaId);
       fetchCoursePeserta(selectedCourse.id);
@@ -442,7 +442,7 @@ export function Courses() {
         <div className="flex items-center gap-4">
           <button onClick={() => setSelectedCourse(null)} className="flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors">
             <ChevronLeft className="w-5 h-5" />
-            <span className="text-sm">Kembali ke Daftar Course</span>
+            <span className="text-sm">Kembali ke Daftar Kursus</span>
           </button>
         </div>
 
@@ -491,7 +491,7 @@ export function Courses() {
               <div className="w-6 h-6 border-4 border-red-600 border-t-transparent rounded-full animate-spin" />
             </div>
           ) : coursePeserta.length === 0 ? (
-            <div className="py-10 text-center text-sm text-gray-400">Belum ada peserta yang terdaftar di course ini.</div>
+            <div className="py-10 text-center text-sm text-gray-400">Belum ada peserta yang terdaftar di kursus ini.</div>
           ) : (
             <div className="divide-y divide-gray-100 dark:divide-white/8">
               {coursePeserta.map((p: any) => {
@@ -539,7 +539,7 @@ export function Courses() {
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
             <div className="bg-white dark:bg-[#161b22] rounded-2xl shadow-2xl w-full max-w-md">
               <div className="flex items-center justify-between px-6 py-4 border-b dark:border-white/10">
-                <h3 className="text-base font-semibold dark:text-white">Tambah Peserta ke Course</h3>
+                <h3 className="text-base font-semibold dark:text-white">Tambah Peserta ke Kursus</h3>
                 <button onClick={() => setShowEnrollModal(false)}><X className="w-5 h-5 text-gray-400" /></button>
               </div>
               <div className="p-6 space-y-4">
@@ -612,7 +612,7 @@ export function Courses() {
         {/* Materials Section */}
         <div>
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Materi Course</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Materi Kursus</h3>
             <div className="flex items-center gap-3 w-full sm:w-auto">
               <div className="relative flex-1 sm:w-72">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4" />
@@ -671,7 +671,7 @@ export function Courses() {
                 );
               })}
               {materi.length === 0 && (
-                <div className="col-span-full text-center py-16 text-gray-400">Belum ada materi untuk course ini</div>
+                <div className="col-span-full text-center py-16 text-gray-400">Belum ada materi untuk kursus ini</div>
               )}
             </div>
           )}
@@ -689,7 +689,7 @@ export function Courses() {
             </button>
           </div>
           {courseTugas.length === 0 ? (
-            <div className="py-10 text-center text-sm text-gray-400">Belum ada tugas untuk course ini.</div>
+            <div className="py-10 text-center text-sm text-gray-400">Belum ada tugas untuk kursus ini.</div>
           ) : (
             <div className="divide-y divide-gray-100 dark:divide-white/8">
               {courseTugas.map((t) => (
@@ -722,7 +722,7 @@ export function Courses() {
             </button>
           </div>
           {courseKuis.length === 0 ? (
-            <div className="py-10 text-center text-sm text-gray-400">Belum ada kuis untuk course ini.</div>
+            <div className="py-10 text-center text-sm text-gray-400">Belum ada kuis untuk kursus ini.</div>
           ) : (
             <div className="divide-y divide-gray-100 dark:divide-white/8">
               {courseKuis.map((k) => (
@@ -1090,11 +1090,11 @@ export function Courses() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="relative w-full sm:w-96">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
-          <input type="text" placeholder="Cari course dan trainer" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-white/10 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-white dark:bg-[#161b22] dark:text-white dark:placeholder-gray-500"
+          <input type="text" placeholder="Cari kursus dan trainer" className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-white/10 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-white dark:bg-[#161b22] dark:text-white dark:placeholder-gray-500"
             value={searchTerm} onChange={e => setSearchTerm(e.target.value)} />
         </div>
         <button onClick={openAdd} className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
-          <Plus className="w-5 h-5" /><span>Buat Course</span>
+          <Plus className="w-5 h-5" /><span>Buat Kursus</span>
         </button>
       </div>
 
@@ -1106,7 +1106,7 @@ export function Courses() {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  <th className="px-6 py-4">Judul Course</th>
+                  <th className="px-6 py-4">Judul Kursus</th>
                   <th className="px-6 py-4">Trainer</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4">Peserta</th>
@@ -1136,18 +1136,18 @@ export function Courses() {
                   </tr>
                 ))}
                 {kursus.length === 0 && (
-                  <tr><td colSpan={5} className="px-6 py-10 text-center text-gray-400">Belum ada course</td></tr>
+                  <tr><td colSpan={5} className="px-6 py-10 text-center text-gray-400">Belum ada kursus</td></tr>
                 )}
               </tbody>
             </table>
           </div>
           {meta && (
             <div className="px-6 py-4 border-t border-gray-200 dark:border-white/10 flex items-center justify-between">
-              <span className="text-sm text-gray-500 dark:text-gray-400">Total {meta.total} course</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">Total {meta.total} kursus</span>
               <div className="flex space-x-2">
-                <button disabled={page <= 1} onClick={() => { setPage(p => p - 1); fetchKursus(page - 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm dark:text-gray-300 disabled:opacity-50">Prev</button>
+                <button disabled={page <= 1} onClick={() => { setPage(p => p - 1); fetchKursus(page - 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm dark:text-gray-300 disabled:opacity-50">Sebelumnya</button>
                 <span className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400">{page} / {meta.last_page}</span>
-                <button disabled={page >= meta.last_page} onClick={() => { setPage(p => p + 1); fetchKursus(page + 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm dark:text-gray-300 disabled:opacity-50">Next</button>
+                <button disabled={page >= meta.last_page} onClick={() => { setPage(p => p + 1); fetchKursus(page + 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm dark:text-gray-300 disabled:opacity-50">Berikutnya</button>
               </div>
             </div>
           )}
@@ -1159,13 +1159,13 @@ export function Courses() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
           <div className="bg-white dark:bg-[#161b22] rounded-xl shadow-2xl w-full max-w-md">
             <div className="flex items-center justify-between p-6 border-b dark:border-white/10">
-              <h3 className="text-lg font-semibold dark:text-white">{editData ? 'Edit Course' : 'Buat Course Baru'}</h3>
+              <h3 className="text-lg font-semibold dark:text-white">{editData ? 'Edit Kursus' : 'Buat Kursus Baru'}</h3>
               <button onClick={() => setShowModal(false)}><X className="w-5 h-5 text-gray-400 dark:text-gray-500" /></button>
             </div>
             <div className="p-6 space-y-4">
               {error && <p className="text-red-500 text-sm bg-red-50 p-2 rounded">{error}</p>}
               <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Judul Course</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Judul Kursus</label>
                 <input className="w-full px-3 py-2 border border-gray-300 dark:border-white/10 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-white dark:bg-[#161b22] dark:text-white"
                   value={form.judul_kursus} onChange={e => setForm(f => ({ ...f, judul_kursus: e.target.value }))} />
               </div>
@@ -1186,7 +1186,7 @@ export function Courses() {
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Status</label>
                 <select className="w-full px-3 py-2 border border-gray-300 dark:border-white/10 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-white dark:bg-[#161b22] dark:text-white"
                   value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}>
-                  <option value="draft">Draft</option>
+                  <option value="draft">Draf</option>
                   <option value="aktif">Aktif</option>
                   <option value="nonaktif">Nonaktif</option>
                 </select>

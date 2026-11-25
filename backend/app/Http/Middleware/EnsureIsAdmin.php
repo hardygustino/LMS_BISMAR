@@ -16,7 +16,7 @@ class EnsureIsAdmin
         $user = $request->user();
 
         if (! $user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
+            return response()->json(['message' => 'Sesi tidak valid. Silakan login terlebih dahulu.'], 401);
         }
 
         // Jika ada role spesifik yang diberikan via parameter middleware

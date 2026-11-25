@@ -34,8 +34,8 @@ const NAV_ITEMS = [
   {
     group: 'Manajemen',
     items: [
-      { name: 'User Management',   href: '/superadmin/users',     icon: Users,     desc: 'Kelola pengguna & role' },
-      { name: 'Branch Management', href: '/superadmin/branches',  icon: Building2, desc: 'Kelola cabang & kota'   },
+      { name: 'Manajemen Pengguna',   href: '/superadmin/users',     icon: Users,     desc: 'Kelola pengguna & peran' },
+      { name: 'Manajemen Cabang', href: '/superadmin/branches',  icon: Building2, desc: 'Kelola cabang & kota'   },
     ],
   },
 ];
@@ -44,8 +44,8 @@ const ALL_PAGES = NAV_ITEMS.flatMap(g => g.items);
 
 const BREADCRUMB: Record<string, string> = {
   '/superadmin/dashboard': 'Dashboard',
-  '/superadmin/users':     'User Management',
-  '/superadmin/branches':  'Branch Management',
+  '/superadmin/users':     'Manajemen Pengguna',
+  '/superadmin/branches':  'Manajemen Cabang',
 };
 
 const getInitials = (name: string) =>

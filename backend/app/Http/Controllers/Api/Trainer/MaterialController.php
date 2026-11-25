@@ -29,7 +29,7 @@ class MaterialController extends Controller
     {
         $course = Course::findOrFail($courseId);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $materials = Material::where('id_kursus', $courseId)
@@ -54,7 +54,7 @@ class MaterialController extends Controller
 
         $course = Course::findOrFail($request->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         if ($request->tipe_materi === 'video') {
@@ -91,7 +91,7 @@ class MaterialController extends Controller
 
         $course = Course::findOrFail($material->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $effectiveTipe = $request->tipe_materi ?? $material->tipe_materi;
@@ -125,7 +125,7 @@ class MaterialController extends Controller
         $material->save();
 
         return response()->json([
-            'message' => 'Materi berhasil diupdate',
+            'message' => 'Materi berhasil diperbarui',
             'data'    => $this->formatMaterial($material),
         ]);
     }
@@ -136,7 +136,7 @@ class MaterialController extends Controller
 
         $course = Course::findOrFail($material->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         if ($material->file_materi && !filter_var($material->file_materi, FILTER_VALIDATE_URL)) {

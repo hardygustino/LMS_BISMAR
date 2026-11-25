@@ -41,7 +41,7 @@ export default function Courses() {
   );
 
   if (loading) return <CoursesSkeleton />;
-  if (error) return <div className="text-center text-red-500 py-12">Gagal memuat kursus. Silakan refresh halaman.</div>;
+  if (error) return <div className="text-center text-red-500 py-12">Gagal memuat kursus. Silakan muat ulang halaman.</div>;
 
   return (
     <div className="space-y-6">

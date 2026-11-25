@@ -289,12 +289,12 @@ export function Participants() {
         </div>
         <div className="flex items-center gap-3">
           <div className="flex space-x-1 bg-gray-200 dark:bg-white/10 p-1 rounded-lg">
-            <button onClick={() => setViewMode('table')} className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'table' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}>Table</button>
-            <button onClick={() => setViewMode('grid')} className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}>Grid</button>
+            <button onClick={() => setViewMode('table')} className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'table' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}>Tabel</button>
+            <button onClick={() => setViewMode('grid')} className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}>Kartu</button>
           </div>
           <button onClick={() => { setShowImportModal(true); setImportFile(null); setImportResult(null); }}
             className="flex items-center space-x-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors">
-            <Upload className="w-4 h-4" /><span>Import CSV</span>
+            <Upload className="w-4 h-4" /><span>Impor CSV</span>
           </button>
           <button onClick={openAdd} className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
             <Plus className="w-4 h-4" /><span>Tambah</span>
@@ -312,7 +312,7 @@ export function Participants() {
                 <tr className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   <th className="px-6 py-4">Peserta</th>
                   <th className="px-6 py-4">Kontak & Sekolah</th>
-                  <th className="px-6 py-4">Progress</th>
+                  <th className="px-6 py-4">Progres</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4 text-right">Aksi</th>
                 </tr>
@@ -356,7 +356,7 @@ export function Participants() {
                     <td className="px-6 py-4 text-right">
                       <div className="flex items-center justify-end space-x-2">
                         {(p.surat_siswa_url || p.surat_ortu_url || p.status_dokumen != null) && (
-                          <button onClick={() => { setReviewPeserta(p); setCatatanTolak(''); }} title="Lihat / Review Dokumen"
+                          <button onClick={() => { setReviewPeserta(p); setCatatanTolak(''); }} title="Lihat / Tinjau Dokumen"
                             className="text-amber-600 hover:text-amber-800 p-1.5 rounded-md hover:bg-amber-50 transition-colors">
                             <FileText className="w-4 h-4" />
                           </button>
@@ -375,9 +375,9 @@ export function Participants() {
             <div className="px-6 py-4 border-t border-gray-200 dark:border-white/10 flex items-center justify-between">
               <span className="text-sm text-gray-500 dark:text-gray-400">Total {meta.total} peserta</span>
               <div className="flex space-x-2">
-                <button disabled={page <= 1} onClick={() => { setPage(p => p - 1); fetchPeserta(page - 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">Prev</button>
+                <button disabled={page <= 1} onClick={() => { setPage(p => p - 1); fetchPeserta(page - 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">Sebelumnya</button>
                 <span className="px-3 py-1 text-sm text-gray-600 dark:text-gray-400">{page} / {meta.last_page}</span>
-                <button disabled={page >= meta.last_page} onClick={() => { setPage(p => p + 1); fetchPeserta(page + 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">Next</button>
+                <button disabled={page >= meta.last_page} onClick={() => { setPage(p => p + 1); fetchPeserta(page + 1, searchTerm); }} className="px-3 py-1 border border-gray-300 dark:border-white/10 rounded-md text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 disabled:opacity-50">Berikutnya</button>
               </div>
             </div>
           )}
@@ -605,7 +605,7 @@ export function Participants() {
           <div className="bg-white dark:bg-[#161b22] rounded-xl shadow-2xl w-full max-w-lg">
             <div className="flex items-center justify-between p-6 border-b dark:border-white/10">
               <div>
-                <h3 className="text-lg font-semibold dark:text-white">Review Dokumen</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Tinjau Dokumen</h3>
                 <p className="text-sm text-gray-500">{reviewPeserta.nama}</p>
               </div>
               <button onClick={() => setReviewPeserta(null)}><X className="w-5 h-5 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300" /></button>
@@ -697,7 +697,7 @@ export function Participants() {
           <div className="bg-white dark:bg-[#161b22] rounded-xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col">
             <div className="flex items-center justify-between p-6 border-b dark:border-white/10">
               <div>
-                <h3 className="text-lg font-semibold dark:text-white">Import Data Siswa PKL</h3>
+                <h3 className="text-lg font-semibold dark:text-white">Impor Data Siswa PKL</h3>
                 <p className="text-sm text-gray-500">Upload file CSV untuk membuat akun siswa secara massal</p>
               </div>
               <button onClick={() => setShowImportModal(false)}><X className="w-5 h-5 text-gray-400 hover:text-gray-600" /></button>
@@ -820,7 +820,7 @@ export function Participants() {
                 <>
                   <button onClick={() => { setImportResult(null); setImportFile(null); }}
                     className="flex-1 py-2 border border-gray-300 dark:border-white/10 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-white/5 text-sm">
-                    Import Lagi
+                    Impor Lagi
                   </button>
                   <button onClick={() => setShowImportModal(false)}
                     className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm">
@@ -836,7 +836,7 @@ export function Participants() {
                   <button onClick={handleImport} disabled={!importFile || importing}
                     className="flex-1 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium disabled:opacity-50 flex items-center justify-center gap-2">
                     <Upload className="w-4 h-4" />
-                    {importing ? 'Mengimpor...' : 'Import Sekarang'}
+                    {importing ? 'Mengimpor...' : 'Impor Sekarang'}
                   </button>
                 </>
               )}
@@ -880,7 +880,7 @@ export function Participants() {
                 <select className="w-full px-3 py-2 border border-gray-300 dark:border-white/10 rounded-lg focus:ring-2 focus:ring-red-500 outline-none bg-white dark:bg-[#161b22] dark:text-white"
                   value={form.status} onChange={e => setForm(f => ({ ...f, status: e.target.value }))}>
                   <option value="aktif">Aktif</option>
-                  <option value="pending">Pending</option>
+                  <option value="pending">Menunggu</option>
                   <option value="ditolak">Ditolak</option>
                 </select>
               </div>

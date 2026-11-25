@@ -33,7 +33,7 @@ export default function Unauthorized() {
           Anda tidak memiliki izin untuk mengakses halaman ini.
           {user && (
             <span className="block mt-1">
-              Role Anda saat ini: <span className="font-semibold text-slate-700">{user.role}</span>
+              Peran Anda saat ini: <span className="font-semibold text-slate-700">{user.role}</span>
             </span>
           )}
         </p>

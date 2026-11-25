@@ -46,7 +46,7 @@ export default function Tasks() {
         setKuisList(k.data.data ?? []);
       })
       .catch(err => {
-        setError(err.response?.data?.message || 'Gagal memuat data. Coba refresh halaman.');
+        setError(err.response?.data?.message || 'Gagal memuat data. Coba muat ulang halaman.');
       })
       .finally(() => setLoading(false));
   };

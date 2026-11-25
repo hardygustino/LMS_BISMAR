@@ -24,7 +24,7 @@ interface SidebarProps {
 const ADMIN_MENU_ITEMS = [
   { id: 'dashboard',    label: 'Dashboard',    icon: LayoutDashboard, roleIds: [2, 3] },
   { id: 'participants', label: 'Peserta',       icon: Users,           roleIds: [2] },
-  { id: 'courses',      label: 'Course',        icon: BookOpen,        roleIds: [2, 3] },
+  { id: 'courses',      label: 'Kursus',        icon: BookOpen,        roleIds: [2, 3] },
   { id: 'exams',        label: 'Tugas & Kuis',  icon: ClipboardList,   roleIds: [2, 3] },
   { id: 'trainers',     label: 'Trainer',       icon: UserSquare2,     roleIds: [2] },
   { id: 'reports',        label: 'Laporan',       icon: BarChart3,       roleIds: [2] },

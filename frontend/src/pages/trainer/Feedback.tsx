@@ -206,7 +206,7 @@ export default function TrainerFeedback() {
 
   const handleSend = async () => {
     if (!form.id_peserta)   { setError('Pilih peserta terlebih dahulu'); return; }
-    if (!form.id_kursus)    { setError('Pilih course terlebih dahulu');  return; }
+    if (!form.id_kursus)    { setError('Pilih kursus terlebih dahulu');  return; }
     if (!form.pesan.trim()) { setError('Pesan tidak boleh kosong');      return; }
     setError('');
     setSuccess('');
@@ -237,7 +237,7 @@ export default function TrainerFeedback() {
         // Jika refetch gagal, biarkan riwayat lama tetap tampil
       }
       setForm({ id_peserta: '', id_kursus: '', pesan: '', tipe: 'positif' });
-      setSuccess('Feedback berhasil dikirim!');
+      setSuccess('Umpan balik berhasil dikirim!');
       if (successTimer.current) clearTimeout(successTimer.current);
       successTimer.current = setTimeout(() => setSuccess(''), 3000);
     } catch (e: unknown) {
@@ -251,14 +251,14 @@ export default function TrainerFeedback() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Feedback Peserta</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Umpan Balik Peserta</h1>
         <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Berikan feedback dan catatan kepada peserta PKL</p>
       </div>
 
       {apiError && (
         <div className="flex items-start gap-3 bg-amber-50 border border-amber-200 text-amber-800 px-4 py-3 rounded-lg text-sm">
           <AlertCircle size={16} className="mt-0.5 shrink-0" />
-          <span>Gagal memuat daftar peserta. Coba refresh halaman atau hubungi administrator.</span>
+          <span>Gagal memuat daftar peserta. Coba muat ulang halaman atau hubungi administrator.</span>
         </div>
       )}
 
@@ -267,7 +267,7 @@ export default function TrainerFeedback() {
         <div className="bg-white dark:bg-[#161b22] rounded-xl border border-gray-200 dark:border-white/8 p-6 space-y-5">
           <h2 className="font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2">
             <Send size={18} className="text-red-600 dark:text-red-400" />
-            Kirim Feedback
+            Kirim Umpan Balik
           </h2>
 
           {/* Pilih Peserta */}
@@ -300,13 +300,13 @@ export default function TrainerFeedback() {
           {/* Pilih Course */}
           <div>
             <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">
-              Pilih Course
+              Pilih Kursus
             </label>
             <CustomSelect
               options={courseList}
               value={form.id_kursus}
               onChange={(val) => setForm({ ...form, id_kursus: val })}
-              placeholder="Cari & pilih course..."
+              placeholder="Cari & pilih kursus..."
               disabled={!form.id_peserta}
               getLabel={(c) => c.judul_kursus}
               getValue={(c) => String(c.id_kursus)}
@@ -330,7 +330,7 @@ export default function TrainerFeedback() {
 
           {/* Tipe */}
           <div>
-            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Tipe Feedback</label>
+            <label className="block text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Tipe Umpan Balik</label>
             <div className="flex gap-3">
               {(['positif', 'negatif', 'netral'] as const).map((t) => (
                 <button
@@ -372,7 +372,7 @@ export default function TrainerFeedback() {
             className="w-full flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white text-sm font-semibold py-2.5 rounded-xl transition-colors"
           >
             <Send size={16} />
-            {loading ? 'Mengirim...' : 'Kirim Feedback'}
+            {loading ? 'Mengirim...' : 'Kirim Umpan Balik'}
           </button>
         </div>
 
@@ -380,7 +380,7 @@ export default function TrainerFeedback() {
         <div className="bg-white dark:bg-[#161b22] rounded-xl border border-gray-200 dark:border-white/8 p-6">
           <h2 className="font-semibold text-gray-800 dark:text-gray-100 flex items-center gap-2 mb-4">
             <MessageSquare size={18} className="text-red-600 dark:text-red-400" />
-            Riwayat Feedback
+            Riwayat Umpan Balik
           </h2>
           {feedbacks.length === 0 ? (
             <div className="text-center py-12 text-gray-400 dark:text-gray-500">

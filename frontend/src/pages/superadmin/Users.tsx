@@ -28,7 +28,7 @@ interface Branch { id: number; nama_cabang: string; kota: string; }
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 const getInitials = (n: string) => n.trim().split(' ').slice(0,2).map(w=>w[0]?.toUpperCase()).join('');
-const getRoleLabel = (r: string) => ({ admin:'Admin Cabang', trainer:'Trainer', user:'User' }[r] ?? r);
+const getRoleLabel = (r: string) => ({ admin:'Admin Cabang', trainer:'Trainer', user:'Pengguna' }[r] ?? r);
 const ROLE_COLOR: Record<string, string> = {
   admin:   'bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-400 border-purple-200 dark:border-purple-500/20',
   trainer: 'bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border-blue-200 dark:border-blue-500/20',
@@ -118,8 +118,8 @@ function UserModal({ isOpen, onClose, onSuccess, initialData, branches }:
     if (!isEdit && !password) e.password='Password wajib diisi';
     if (password && password.length<8) e.password='Minimal 8 karakter';
     if (password && password!==confirmPw) e.confirmPw='Password tidak cocok';
-    if (!idRole) e.idRole='Role wajib dipilih';
-    if (!idCabang) e.idCabang='Branch wajib dipilih';
+    if (!idRole) e.idRole='Peran wajib dipilih';
+    if (!idCabang) e.idCabang='Cabang wajib dipilih';
     setErrors(e); return !Object.keys(e).length;
   };
 
@@ -151,7 +151,7 @@ function UserModal({ isOpen, onClose, onSuccess, initialData, branches }:
               <UsersIcon size={16} className="text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-primary">{isEdit?'Edit User':'Tambah User Baru'}</h2>
+              <h2 className="text-sm font-bold text-primary">{isEdit?'Edit Pengguna':'Tambah Pengguna Baru'}</h2>
               <p className="text-xs text-muted">{isEdit?'Ubah data pengguna':'Tambah pengguna baru ke sistem'}</p>
             </div>
           </div>
@@ -206,22 +206,22 @@ function UserModal({ isOpen, onClose, onSuccess, initialData, branches }:
           {/* Role + Branch */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-semibold text-secondary mb-1">Role <span className="text-red-500">*</span></label>
+              <label className="block text-xs font-semibold text-secondary mb-1">Peran <span className="text-red-500">*</span></label>
               <div className="relative"><Shield size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
                 <select className={sel('idRole')} value={idRole} onChange={e=>{setIdRole(e.target.value);ce('idRole')}}>
-                  <option value="">Pilih Role</option>
+                  <option value="">Pilih Peran</option>
                   <option value="2">Admin Cabang</option>
                   <option value="3">Trainer</option>
-                  <option value="4">User</option>
+                  <option value="4">Pengguna</option>
                 </select>
               </div>
               {errors.idRole && <p className="text-xs text-red-500 mt-0.5">{errors.idRole}</p>}
             </div>
             <div>
-              <label className="block text-xs font-semibold text-secondary mb-1">Branch <span className="text-red-500">*</span></label>
+              <label className="block text-xs font-semibold text-secondary mb-1">Cabang <span className="text-red-500">*</span></label>
               <div className="relative"><Building2 size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted" />
                 <select className={sel('idCabang')} value={idCabang} onChange={e=>{setIdCabang(e.target.value);ce('idCabang')}}>
-                  <option value="">Pilih Branch</option>
+                  <option value="">Pilih Cabang</option>
                   {branches.map(b=><option key={b.id} value={b.id}>{b.nama_cabang}</option>)}
                 </select>
               </div>
@@ -254,7 +254,7 @@ function UserModal({ isOpen, onClose, onSuccess, initialData, branches }:
           <button type="button" onClick={handleSubmit} disabled={loading}
             className="flex items-center gap-2 px-5 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold disabled:opacity-60 transition-colors shadow-sm">
             {loading ? <><span className="w-3 h-3 border-2 border-white border-t-transparent rounded-full animate-spin" />Menyimpan...</>
-              : isEdit ? 'Simpan Perubahan' : 'Buat User'}
+              : isEdit ? 'Simpan Perubahan' : 'Buat Pengguna'}
           </button>
         </div>
       </div>
@@ -278,8 +278,8 @@ function DeleteDialog({ user, onCancel, onConfirm }:{ user:UserItem; onCancel:()
         <div className="w-11 h-11 rounded-full bg-red-50 dark:bg-red-500/10 border border-red-100 dark:border-red-500/20 flex items-center justify-center mx-auto mb-4">
           <Trash2 size={18} className="text-red-600 dark:text-red-400" />
         </div>
-        <h3 className="text-sm font-bold text-primary">Hapus User?</h3>
-        <p className="text-xs text-label mt-2">User <span className="font-semibold text-secondary">"{user.nama}"</span> akan dihapus permanen dan tidak bisa dipulihkan.</p>
+        <h3 className="text-sm font-bold text-primary">Hapus Pengguna?</h3>
+        <p className="text-xs text-label mt-2">Pengguna <span className="font-semibold text-secondary">"{user.nama}"</span> akan dihapus permanen dan tidak bisa dipulihkan.</p>
         <div className="flex gap-2 mt-5">
           <button type="button" onClick={onCancel} disabled={loading} className="flex-1 py-2 rounded-lg border border-theme text-xs font-semibold text-secondary hover:bg-muted disabled:opacity-50 transition-colors">Batal</button>
           <button type="button" onClick={handleConfirm} disabled={loading}
@@ -300,7 +300,7 @@ function DetailDrawer({ user, onClose, onEdit }:{ user:UserItem; onClose:()=>voi
       onClick={e=>{if(e.target===e.currentTarget)onClose()}}>
       <div className="bg-card h-full w-72 flex flex-col shadow-2xl border-l border-theme">
         <div className="flex items-center justify-between px-5 py-4 border-b border-subtle bg-muted/50">
-          <span className="text-xs font-bold text-secondary uppercase tracking-wider">Detail User</span>
+          <span className="text-xs font-bold text-secondary uppercase tracking-wider">Detail Pengguna</span>
           <button type="button" onClick={onClose} className="p-1.5 rounded-lg hover:bg-muted text-muted transition-colors"><X size={15}/></button>
         </div>
         <div className="flex-1 overflow-y-auto p-5">
@@ -332,7 +332,7 @@ function DetailDrawer({ user, onClose, onEdit }:{ user:UserItem; onClose:()=>voi
             </div>
           </div>
           <div className="mt-3 space-y-0">
-            {([['Branch', user.nama_cabang], ['Username', user.username]] as [string,string][]).map(([label,value]) => (
+            {([['Cabang', user.nama_cabang], ['Username', user.username]] as [string,string][]).map(([label,value]) => (
               <div key={label} className="flex justify-between py-3 border-b border-theme">
                 <span className="text-xs text-muted">{label}</span>
                 <span className="text-xs font-semibold text-secondary">{value}</span>
@@ -340,7 +340,7 @@ function DetailDrawer({ user, onClose, onEdit }:{ user:UserItem; onClose:()=>voi
             ))}
             <div className="py-3">
               <div className="flex justify-between items-start">
-                <span className="text-xs text-muted">Last Login</span>
+                <span className="text-xs text-muted">Login Terakhir</span>
                 <div className="text-right">
                   {user.is_online ? (
                     <span className="flex items-center gap-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -358,7 +358,7 @@ function DetailDrawer({ user, onClose, onEdit }:{ user:UserItem; onClose:()=>voi
         <div className="p-4 border-t border-subtle">
           <button type="button" onClick={onEdit}
             className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition-colors">
-            <Edit2 size={13} /> Edit User
+            <Edit2 size={13} /> Edit Pengguna
           </button>
         </div>
       </div>
@@ -420,7 +420,7 @@ export default function Users() {
         const next = new Set([...prev].filter(id => freshIds.has(id)));
         return next.size === prev.size ? prev : next;
       });
-    } catch { showToast('Gagal memuat data user.','error'); }
+    } catch { showToast('Gagal memuat data pengguna.','error'); }
     finally { setLoading(false); }
   },[page,debouncedSearch,filterRole,filterCabang]);
 
@@ -436,7 +436,7 @@ export default function Users() {
       const res = await api.get('/superadmin/users',{params:p});
       const all: UserItem[] = res.data.data;
       if (!all.length) { showToast('Tidak ada data.','error'); return; }
-      const headers = ['No','Nama','Username','Email','Role','Branch','Status','Last Login','Online'];
+      const headers = ['No','Nama','Username','Email','Peran','Cabang','Status','Login Terakhir','Online'];
       const rows = all.map((u,i) => {
         const { relative } = formatLastLogin(u.last_login);
         return [i+1,`"${u.nama}"`,u.username,u.email??'-',getRoleLabel(u.role),`"${u.nama_cabang}"`,
@@ -457,10 +457,10 @@ export default function Users() {
     try {
       await api.delete(`/superadmin/users/${delTarget.id}`);
       setDelTarget(null); setDetailTarget(null);
-      showToast(`User "${delTarget.nama}" dihapus.`, 'success');
+      showToast(`Pengguna "${delTarget.nama}" dihapus.`, 'success');
       fetchUsers();
     } catch {
-      showToast('Gagal menghapus user.', 'error');
+      showToast('Gagal menghapus pengguna.', 'error');
       throw new Error('delete failed');
     }
   };
@@ -492,14 +492,14 @@ export default function Users() {
 
   const handleBulkDelete = async () => {
     if (!selected.size) return;
-    if (!window.confirm(`Hapus ${selected.size} user yang dipilih? Tindakan ini tidak bisa dibatalkan.`)) return;
+    if (!window.confirm(`Hapus ${selected.size} pengguna yang dipilih? Tindakan ini tidak bisa dibatalkan.`)) return;
     setBulkLoading(true);
     try {
       await api.post('/superadmin/users/bulk-delete', { ids: [...selected] });
-      showToast(`${selected.size} user berhasil dihapus.`);
+      showToast(`${selected.size} pengguna berhasil dihapus.`);
       setSelected(new Set());
       fetchUsers();
-    } catch { showToast('Gagal menghapus user.', 'error'); }
+    } catch { showToast('Gagal menghapus pengguna.', 'error'); }
     finally { setBulkLoading(false); }
   };
 
@@ -508,10 +508,10 @@ export default function Users() {
     setBulkLoading(true);
     try {
       await api.post('/superadmin/users/bulk-status', { ids: [...selected], status });
-      showToast(`${selected.size} user diubah menjadi ${status}.`);
+      showToast(`${selected.size} pengguna diubah menjadi ${status}.`);
       setSelected(new Set());
       fetchUsers();
-    } catch { showToast('Gagal mengubah status user.', 'error'); }
+    } catch { showToast('Gagal mengubah status pengguna.', 'error'); }
     finally { setBulkLoading(false); }
   };
 
@@ -560,9 +560,9 @@ export default function Users() {
       {/* Page header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-primary tracking-tight">User Management</h1>
+          <h1 className="text-xl font-bold text-primary tracking-tight">Manajemen Pengguna</h1>
           <div className="flex items-center gap-2 mt-0.5">
-            <p className="text-xs text-muted">Kelola pengguna, role, dan penugasan cabang</p>
+            <p className="text-xs text-muted">Kelola pengguna, peran, dan penugasan cabang</p>
             {onlineCount > 0 && (
               <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 px-2 py-0.5 rounded-full">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />{onlineCount} online
@@ -573,11 +573,11 @@ export default function Users() {
         <div className="flex items-center gap-2 shrink-0">
           <button type="button" onClick={() => { setShowImportModal(true); setImportFile(null); setImportCabang(''); setImportResult(null); }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-colors shadow-sm">
-            <Upload size={14}/> Import Siswa PKL
+            <Upload size={14}/> Impor Siswa PKL
           </button>
           <button type="button" onClick={()=>setShowCreate(true)}
             className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-colors shadow-sm">
-            <Plus size={14}/> Tambah User
+            <Plus size={14}/> Tambah Pengguna
           </button>
         </div>
       </div>
@@ -598,13 +598,13 @@ export default function Users() {
           <div className="flex items-center gap-2 flex-wrap">
             <SlidersHorizontal size={13} className="text-muted hidden sm:block" />
             <CustomSelect
-              placeholder="Semua Role"
+              placeholder="Semua Peran"
               value={filterRole}
               onChange={v => setFilterRole(String(v))}
               options={[
                 { value: 'admin', label: 'Admin Cabang' },
                 { value: 'trainer', label: 'Trainer' },
-                { value: 'user', label: 'User' },
+                { value: 'user', label: 'Pengguna' },
               ]}
             />
             <CustomSelect
@@ -615,12 +615,12 @@ export default function Users() {
             />
             {hasFilter && (
               <button type="button" onClick={resetFilters}
-                className="px-3 py-2 border border-theme rounded-lg text-xs text-label hover:bg-muted transition-colors">Reset</button>
+                className="px-3 py-2 border border-theme rounded-lg text-xs text-label hover:bg-muted transition-colors">Atur Ulang</button>
             )}
             <button type="button" onClick={handleExportCSV} disabled={exporting}
               className="flex items-center gap-1.5 px-3 py-2 border border-theme rounded-lg text-xs font-semibold text-secondary hover:bg-muted disabled:opacity-50 transition-colors">
               {exporting ? <span className="w-3 h-3 border-2 border-muted border-t-transparent rounded-full animate-spin" /> : <Download size={12}/>}
-              Export
+              Ekspor
             </button>
           </div>
         </div>
@@ -629,7 +629,7 @@ export default function Users() {
         {someSelected && (
           <div className="px-5 py-2.5 bg-red-50 dark:bg-red-900/20 border-b border-red-200 dark:border-red-500/30 flex items-center gap-3 flex-wrap">
             <span className="text-xs font-bold text-red-700 dark:text-red-300 flex items-center gap-1.5">
-              <CheckCheck size={13}/>{selected.size} user dipilih
+              <CheckCheck size={13}/>{selected.size} pengguna dipilih
             </span>
             <div className="flex items-center gap-2 ml-auto flex-wrap">
               <button type="button" onClick={()=>handleBulkStatus('aktif')} disabled={bulkLoading}
@@ -678,7 +678,7 @@ export default function Users() {
                     {allSelected ? <CheckSquare size={15} className="text-red-600 dark:text-red-400"/> : someSelected ? <CheckSquare size={15} className="text-red-400"/> : <Square size={15}/>}
                   </button>
                 </th>
-                {['Pengguna','Role','Cabang','Status','Last Login',''].map((h,i)=>(
+                {['Pengguna','Peran','Cabang','Status','Login Terakhir',''].map((h,i)=>(
                   <th key={i} className={`px-5 py-3 text-[10px] font-bold text-muted uppercase tracking-wider ${i===5?'text-right':''}`}>{h}</th>
                 ))}
               </tr>
@@ -697,8 +697,8 @@ export default function Users() {
                       <UsersIcon size={20} className="text-muted" />
                     </div>
                     <p className="text-sm font-semibold text-muted">Tidak ada pengguna</p>
-                    <p className="text-xs text-muted mt-1">Coba ubah filter atau tambah user baru</p>
-                    {hasFilter && <button type="button" onClick={resetFilters} className="text-xs text-red-600 dark:text-red-400 hover:underline mt-2">Reset filter</button>}
+                    <p className="text-xs text-muted mt-1">Coba ubah filter atau tambah pengguna baru</p>
+                    {hasFilter && <button type="button" onClick={resetFilters} className="text-xs text-red-600 dark:text-red-400 hover:underline mt-2">Atur ulang filter</button>}
                   </td>
                 </tr>
               ) : users.map(user=>(
@@ -772,7 +772,7 @@ export default function Users() {
           <div className="flex items-center gap-1">
             <button type="button" onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}
               className="flex items-center gap-1 px-2.5 py-1.5 border border-theme rounded-lg text-xs font-medium text-label hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-              <ChevronLeft size={13}/> Prev
+              <ChevronLeft size={13}/> Sebelumnya
             </button>
             {pageNumbers().map((p,i) =>
               p==='...' ? <span key={`e${i}`} className="px-1 text-muted text-xs">…</span>
@@ -783,7 +783,7 @@ export default function Users() {
             )}
             <button type="button" onClick={()=>setPage(p=>Math.min(lastPage,p+1))} disabled={page===lastPage}
               className="flex items-center gap-1 px-2.5 py-1.5 border border-theme rounded-lg text-xs font-medium text-label hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-              Next <ChevronRight size={13}/>
+              Berikutnya <ChevronRight size={13}/>
             </button>
           </div>
         </div>
@@ -799,7 +799,7 @@ export default function Users() {
                   <Upload size={16} className="text-emerald-600 dark:text-emerald-400" />
                 </div>
                 <div>
-                  <h2 className="text-sm font-bold text-primary">Import Data Siswa PKL</h2>
+                  <h2 className="text-sm font-bold text-primary">Impor Data Siswa PKL</h2>
                   <p className="text-xs text-muted">Buat akun siswa secara massal dari file CSV</p>
                 </div>
               </div>
@@ -929,7 +929,7 @@ export default function Users() {
                 <>
                   <button onClick={() => { setImportResult(null); setImportFile(null); }}
                     className="flex-1 py-2 border border-theme rounded-lg text-xs font-semibold text-secondary hover:bg-muted transition-colors">
-                    Import Lagi
+                    Impor Lagi
                   </button>
                   <button onClick={() => setShowImportModal(false)}
                     className="flex-1 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold transition-colors">
@@ -945,7 +945,7 @@ export default function Users() {
                   <button onClick={handleImportCsv} disabled={!importFile || !importCabang || importing}
                     className="flex-1 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold disabled:opacity-50 flex items-center justify-center gap-2 transition-colors">
                     <Upload size={13} />
-                    {importing ? 'Mengimpor...' : 'Import Sekarang'}
+                    {importing ? 'Mengimpor...' : 'Impor Sekarang'}
                   </button>
                 </>
               )}
@@ -956,9 +956,9 @@ export default function Users() {
 
       {/* Modals */}
       <UserModal isOpen={showCreate} onClose={()=>setShowCreate(false)}
-        onSuccess={()=>{ showToast('User berhasil dibuat!'); fetchUsers(); }} branches={branches} />
+        onSuccess={()=>{ showToast('Pengguna berhasil dibuat!'); fetchUsers(); }} branches={branches} />
       <UserModal isOpen={editTarget!==null} onClose={()=>setEditTarget(null)}
-        onSuccess={()=>{ showToast('User berhasil diupdate!'); fetchUsers(); }}
+        onSuccess={()=>{ showToast('Pengguna berhasil diperbarui!'); fetchUsers(); }}
         initialData={editTarget} branches={branches} />
       {delTarget    && <DeleteDialog user={delTarget}    onCancel={()=>setDelTarget(null)}    onConfirm={handleDelete} />}
       {detailTarget && <DetailDrawer user={detailTarget} onClose={()=>setDetailTarget(null)}  onEdit={()=>{ setEditTarget(detailTarget); setDetailTarget(null); }} />}

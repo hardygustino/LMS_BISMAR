@@ -61,7 +61,7 @@ class CourseController extends Controller
         Cache::forget("trainer_courses_{$user->id_pengguna}");
 
         return response()->json([
-            'message' => 'Course berhasil dibuat',
+            'message' => 'Kursus berhasil dibuat',
             'data'    => $course,
         ], 201);
     }
@@ -72,7 +72,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         return response()->json($course);
@@ -84,7 +84,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([
@@ -108,7 +108,7 @@ class CourseController extends Controller
         Cache::forget("trainer_courses_{$request->user()->id_pengguna}");
 
         return response()->json([
-            'message' => 'Course berhasil diupdate',
+            'message' => 'Kursus berhasil diperbarui',
             'data'    => $course,
         ]);
     }
@@ -119,7 +119,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         DB::transaction(function () use ($id, $course, $request) {
@@ -167,7 +167,7 @@ class CourseController extends Controller
 
         Cache::forget("trainer_courses_{$request->user()->id_pengguna}");
 
-        return response()->json(['message' => 'Course berhasil dihapus']);
+        return response()->json(['message' => 'Kursus berhasil dihapus']);
     }
 
     // 6. Daftar peserta yang enrolled ke course ini
@@ -176,7 +176,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $peserta = PesertaKursus::with('pengguna.dataPkl')
@@ -200,7 +200,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([
@@ -240,7 +240,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $deleted = PesertaKursus::where('id_kursus', $id)
@@ -260,7 +260,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $course->update(['status' => 'aktif']);
@@ -268,7 +268,7 @@ class CourseController extends Controller
         Cache::forget("trainer_courses_{$request->user()->id_pengguna}");
 
         return response()->json([
-            'message' => 'Course berhasil dipublish',
+            'message' => 'Kursus berhasil diterbitkan',
             'data'    => $course,
         ]);
     }
@@ -279,7 +279,7 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $course->update(['status' => 'draft']);
@@ -287,7 +287,7 @@ class CourseController extends Controller
         Cache::forget("trainer_courses_{$request->user()->id_pengguna}");
 
         return response()->json([
-            'message' => 'Course berhasil dikembalikan ke draft',
+            'message' => 'Kursus berhasil dikembalikan ke draf',
             'data'    => $course,
         ]);
     }

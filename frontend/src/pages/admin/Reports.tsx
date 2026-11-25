@@ -105,17 +105,17 @@ export function Reports() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Branch Analytics & Reports</h2>
+        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">Analitik & Laporan Cabang</h2>
         <div className="flex space-x-3">
           <button onClick={handleExportExcel}
             className="flex items-center space-x-2 bg-white dark:bg-[#161b22] border border-gray-300 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg transition-colors">
             <FileSpreadsheet className="w-4 h-4 text-green-600" />
-            <span className="text-sm font-medium">Export Excel</span>
+            <span className="text-sm font-medium">Ekspor Excel</span>
           </button>
           <button onClick={() => window.print()}
             className="flex items-center space-x-2 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition-colors">
             <FileText className="w-4 h-4" />
-            <span className="text-sm font-medium">Export PDF</span>
+            <span className="text-sm font-medium">Ekspor PDF</span>
           </button>
         </div>
       </div>
@@ -123,7 +123,7 @@ export function Reports() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div className="bg-white dark:bg-[#161b22] p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/8">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Enrollment vs Completion</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Pendaftaran vs Penyelesaian</h3>
           <div className="h-72">
             {loadingChart
               ? <Spinner />
@@ -145,7 +145,7 @@ export function Reports() {
         </div>
 
         <div className="bg-white dark:bg-[#161b22] p-6 rounded-xl shadow-sm border border-gray-100 dark:border-white/8">
-          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Growth Trend</h3>
+          <h3 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">Tren Pertumbuhan</h3>
           <div className="h-72">
             {loadingChart
               ? <Spinner />
@@ -244,7 +244,7 @@ function PesertaTable({ data }: { data: any[] }) {
   return (
     <table className="w-full text-left">
       <thead className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10">
-        <tr><Th>Nama</Th><Th>Email</Th><Th>Asal Sekolah</Th><Th>Cabang</Th><Th>Enrolled</Th><Th>Selesai</Th><Th>Progress</Th><Th>Status</Th></tr>
+        <tr><Th>Nama</Th><Th>Email</Th><Th>Asal Sekolah</Th><Th>Cabang</Th><Th>Terdaftar</Th><Th>Selesai</Th><Th>Progres</Th><Th>Status</Th></tr>
       </thead>
       <tbody className="divide-y divide-gray-100 dark:divide-white/5">
         {data.length === 0 ? <EmptyRow cols={8} /> : data.map((r, i) => (
@@ -275,7 +275,7 @@ function KursusTable({ data }: { data: any[] }) {
   return (
     <table className="w-full text-left">
       <thead className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10">
-        <tr><Th>Judul Kursus</Th><Th>Trainer</Th><Th>Status</Th><Th>Total Peserta</Th><Th>Selesai</Th><Th>Completion Rate</Th></tr>
+        <tr><Th>Judul Kursus</Th><Th>Trainer</Th><Th>Status</Th><Th>Total Peserta</Th><Th>Selesai</Th><Th>Tingkat Penyelesaian</Th></tr>
       </thead>
       <tbody className="divide-y divide-gray-100 dark:divide-white/5">
         {data.length === 0 ? <EmptyRow cols={6} /> : data.map((r, i) => (
@@ -304,7 +304,7 @@ function KuisTable({ data }: { data: any[] }) {
   return (
     <table className="w-full text-left">
       <thead className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10">
-        <tr><Th>Judul Kuis</Th><Th>Kursus</Th><Th>Total Attempts</Th><Th>Selesai</Th><Th>Rata-rata Skor</Th></tr>
+        <tr><Th>Judul Kuis</Th><Th>Kursus</Th><Th>Total Percobaan</Th><Th>Selesai</Th><Th>Rata-rata Skor</Th></tr>
       </thead>
       <tbody className="divide-y divide-gray-100 dark:divide-white/5">
         {data.length === 0 ? <EmptyRow cols={5} /> : data.map((r, i) => (

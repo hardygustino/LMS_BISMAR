@@ -487,7 +487,7 @@ export function Trainers() {
                             <span className="text-sm font-medium text-gray-800 dark:text-white">{k.judul}</span>
                           </div>
                           <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${k.status === 'aktif' ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'}`}>
-                            {k.status === 'aktif' ? 'Published' : 'Draft'}
+                            {k.status === 'aktif' ? 'Terbit' : 'Draf'}
                           </span>
                         </li>
                       ))}

@@ -60,7 +60,7 @@ export default function Grades() {
   }));
 
   if (loading) return <GradesSkeleton />;
-  if (error) return <div className="text-center text-red-500 py-12">Gagal memuat nilai. Silakan refresh halaman.</div>;
+  if (error) return <div className="text-center text-red-500 py-12">Gagal memuat nilai. Silakan muat ulang halaman.</div>;
 
   return (
     <div className="space-y-6">
@@ -238,7 +238,7 @@ export default function Grades() {
                   <th className="px-6 py-4">Kursus</th>
                   <th className="px-6 py-4 text-center">Nilai</th>
                   <th className="px-6 py-4">Tanggal Kumpul</th>
-                  <th className="px-6 py-4">Feedback</th>
+                  <th className="px-6 py-4">Umpan Balik</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100 dark:divide-white/8">

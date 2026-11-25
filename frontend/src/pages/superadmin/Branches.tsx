@@ -24,7 +24,7 @@ const ROLE_CFG: Record<BranchUserRole, { label:string; sectionBg:string; section
   superadmin: { label:'Superadmin', sectionBg:'bg-rose-50 dark:bg-rose-500/10',     sectionText:'text-rose-700 dark:text-rose-400',     badgeBg:'bg-rose-100 dark:bg-rose-500/20',     badgeText:'text-rose-700 dark:text-rose-400' },
   admin:      { label:'Admin',      sectionBg:'bg-purple-50 dark:bg-purple-500/10', sectionText:'text-purple-700 dark:text-purple-400', badgeBg:'bg-purple-100 dark:bg-purple-500/20', badgeText:'text-purple-700 dark:text-purple-400' },
   trainer:    { label:'Trainer',    sectionBg:'bg-blue-50 dark:bg-blue-500/10',     sectionText:'text-blue-700 dark:text-blue-400',     badgeBg:'bg-blue-100 dark:bg-blue-500/20',     badgeText:'text-blue-700 dark:text-blue-400' },
-  user:       { label:'User',       sectionBg:'bg-muted',                           sectionText:'text-secondary',                       badgeBg:'bg-muted',                            badgeText:'text-label' },
+  user:       { label:'Pengguna',       sectionBg:'bg-muted',                           sectionText:'text-secondary',                       badgeBg:'bg-muted',                            badgeText:'text-label' },
 };
 
 // ─── Users Modal ──────────────────────────────────────────────────────────────
@@ -41,7 +41,7 @@ function UsersModal({ branch, onClose }: { branch: Branch; onClose: ()=>void }) 
         const res = await api.get<BranchUsersResponse>(`/superadmin/cabang/${branch.id}/users`,{ signal:ctrl.signal });
         setUsers(res.data.data ?? []);
       } catch (err: any) {
-        if (err.name !== 'CanceledError') setError(err.response?.data?.message ?? 'Gagal memuat user.');
+        if (err.name !== 'CanceledError') setError(err.response?.data?.message ?? 'Gagal memuat pengguna.');
       } finally { setLoading(false); }
     })();
     return () => ctrl.abort();
@@ -69,7 +69,7 @@ function UsersModal({ branch, onClose }: { branch: Branch; onClose: ()=>void }) 
               <p className="text-xs text-muted mt-0.5">
                 {loading ? 'Memuat…' : (
                   <span>
-                    <span className="font-semibold text-secondary">{users.length}</span> user terdaftar
+                    <span className="font-semibold text-secondary">{users.length}</span> pengguna terdaftar
                     {ROLE_ORDER.filter(r=>grouped[r].length>0).map(r=>` · ${grouped[r].length} ${ROLE_CFG[r].label.toLowerCase()}`).join('')}
                   </span>
                 )}
@@ -99,7 +99,7 @@ function UsersModal({ branch, onClose }: { branch: Branch; onClose: ()=>void }) 
               <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center">
                 <Users size={20} className="text-muted" />
               </div>
-              <p className="text-sm font-semibold text-muted">Belum ada user di cabang ini</p>
+              <p className="text-sm font-semibold text-muted">Belum ada pengguna di cabang ini</p>
             </div>
           )}
           {!loading && !error && users.length > 0 && (
@@ -355,15 +355,15 @@ function DeleteDialog({ branch, onCancel, onConfirm, onForceConfirm, error, user
         )}
         {userCount !== null && (
           <div className="mt-3 px-3 py-2.5 bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 rounded-lg text-xs text-amber-700 dark:text-amber-400 text-left">
-            <p className="font-semibold mb-1">Hapus beserta {userCount} user?</p>
-            <p className="text-amber-600 dark:text-amber-500">Semua akun user di cabang ini akan ikut dihapus permanen dan tidak bisa dikembalikan.</p>
+            <p className="font-semibold mb-1">Hapus beserta {userCount} pengguna?</p>
+            <p className="text-amber-600 dark:text-amber-500">Semua akun pengguna di cabang ini akan ikut dihapus permanen dan tidak bisa dikembalikan.</p>
           </div>
         )}
         <div className="flex flex-col gap-2 mt-5">
           {userCount !== null && (
             <button type="button" onClick={onForceConfirm}
               className="w-full py-2 rounded-lg bg-red-700 text-white text-xs font-bold hover:bg-red-800 transition-colors">
-              Hapus Cabang + {userCount} User
+              Hapus Cabang + {userCount} Pengguna
             </button>
           )}
           <div className="flex gap-2">
@@ -405,11 +405,11 @@ function DetailDrawer({ branch, onClose, onEdit, onViewUsers }:
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-2xl font-bold">{branch.total_users.toLocaleString()}</p>
-                <p className="text-red-200 text-xs">Total Users</p>
+                <p className="text-red-200 text-xs">Total Pengguna</p>
               </div>
               <button type="button" onClick={onViewUsers}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold text-white border border-white/20 bg-white/10 hover:bg-white/20 transition-all">
-                <Eye size={13}/> Lihat User
+                <Eye size={13}/> Lihat Pengguna
               </button>
             </div>
           </div>
@@ -495,13 +495,13 @@ function BranchCard({ branch, onEdit, onDelete, onDetail, onUsers }:
             <Users size={12} className="text-red-600 dark:text-red-400"/>
           </div>
           <div>
-            <p className="text-[10px] text-muted leading-none">Total Users</p>
+            <p className="text-[10px] text-muted leading-none">Total Pengguna</p>
             <p className="text-sm font-bold text-primary">{branch.total_users.toLocaleString()}</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
           <button type="button" onClick={onUsers}
-            className="p-1.5 rounded-lg text-muted hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all" title="Lihat user">
+            className="p-1.5 rounded-lg text-muted hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all" title="Lihat pengguna">
             <Eye size={13}/>
           </button>
           <button type="button" onClick={onDetail}
@@ -572,7 +572,7 @@ export default function Branches() {
       const res = await api.get('/superadmin/cabang',{params});
       const data: Branch[] = res.data.data;
       if (!data.length) { showToast('Tidak ada data.','error'); return; }
-      const headers = ['No','Nama Cabang','Kode','Kota','Alamat','Telepon','Admin','Total Users','Status'];
+      const headers = ['No','Nama Cabang','Kode','Kota','Alamat','Telepon','Admin','Total Pengguna','Status'];
       const rows    = data.map((b,i)=>[i+1,`"${b.nama_cabang}"`,b.kode,b.kota,`"${b.alamat}"`,b.telepon,`"${b.admin}"`,b.total_users,b.status==='aktif'?'Aktif':'Nonaktif']);
       const csv     = [headers.join(','),...rows.map(r=>r.join(','))].join('\n');
       const blob    = new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8;'});
@@ -632,9 +632,9 @@ export default function Branches() {
       {/* Page header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl font-bold text-primary tracking-tight">Branch Management</h1>
+          <h1 className="text-xl font-bold text-primary tracking-tight">Manajemen Cabang</h1>
           <p className="text-xs text-muted mt-0.5">
-            <span className="font-semibold text-secondary">{totalAll} cabang</span> — {activeCount} aktif · {totalUsers.toLocaleString()} total user
+            <span className="font-semibold text-secondary">{totalAll} cabang</span> — {activeCount} aktif · {totalUsers.toLocaleString()} total pengguna
           </p>
         </div>
         <button type="button" onClick={()=>setShowCreate(true)}
@@ -670,12 +670,12 @@ export default function Branches() {
           />
           {hasFilter && (
             <button type="button" onClick={resetFilters}
-              className="px-3 py-2 border border-theme rounded-lg text-xs text-label hover:bg-muted transition-colors">Reset</button>
+              className="px-3 py-2 border border-theme rounded-lg text-xs text-label hover:bg-muted transition-colors">Atur Ulang</button>
           )}
           <button type="button" onClick={handleExportCSV} disabled={exporting}
             className="flex items-center gap-1.5 px-3 py-2 border border-theme rounded-lg text-xs font-semibold text-secondary hover:bg-muted disabled:opacity-50 transition-colors">
             {exporting ? <span className="w-3 h-3 border-2 border-muted border-t-transparent rounded-full animate-spin"/> : <Download size={12}/>}
-            Export
+            Ekspor
           </button>
         </div>
       </div>
@@ -709,7 +709,7 @@ export default function Branches() {
           </div>
           <p className="text-sm font-semibold text-muted">Tidak ada cabang</p>
           <p className="text-xs text-muted mt-1">Coba ubah filter atau tambah cabang baru</p>
-          {hasFilter && <button type="button" onClick={resetFilters} className="text-xs text-red-600 dark:text-red-400 hover:underline mt-2">Reset filter</button>}
+          {hasFilter && <button type="button" onClick={resetFilters} className="text-xs text-red-600 dark:text-red-400 hover:underline mt-2">Atur ulang filter</button>}
         </div>
       )}
 
@@ -723,7 +723,7 @@ export default function Branches() {
           <div className="flex items-center gap-1">
             <button type="button" onClick={()=>setPage(p=>Math.max(1,p-1))} disabled={page===1}
               className="flex items-center gap-1 px-2.5 py-1.5 border border-theme rounded-lg text-xs font-medium text-label hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-              <ChevronLeft size={13}/> Prev
+              <ChevronLeft size={13}/> Sebelumnya
             </button>
             {pageNumbers().map((p,i)=>
               p==='...' ? <span key={`e${i}`} className="px-1 text-muted text-xs">…</span>
@@ -734,7 +734,7 @@ export default function Branches() {
             )}
             <button type="button" onClick={()=>setPage(p=>Math.min(totalPages,p+1))} disabled={page===totalPages}
               className="flex items-center gap-1 px-2.5 py-1.5 border border-theme rounded-lg text-xs font-medium text-label hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-colors">
-              Next <ChevronRight size={13}/>
+              Berikutnya <ChevronRight size={13}/>
             </button>
           </div>
         </div>
@@ -744,7 +744,7 @@ export default function Branches() {
       <BranchModal isOpen={showCreate} onClose={()=>setShowCreate(false)}
         onSuccess={()=>{ showToast('Cabang berhasil dibuat!'); fetchBranches(); }} cities={cities}/>
       <BranchModal isOpen={editTarget!==null} onClose={()=>setEditTarget(null)}
-        onSuccess={()=>{ showToast('Cabang berhasil diupdate!'); fetchBranches(); }}
+        onSuccess={()=>{ showToast('Cabang berhasil diperbarui!'); fetchBranches(); }}
         initialData={editTarget} cities={cities}/>
       {delTarget    && <DeleteDialog branch={delTarget}    onCancel={()=>{setDelTarget(null);setDeleteError(null);setDeleteUserCount(null);}}    onConfirm={()=>handleDelete(false)} onForceConfirm={()=>handleDelete(true)} error={deleteError} userCount={deleteUserCount}/>}
       {detailTarget && <DetailDrawer branch={detailTarget} onClose={()=>setDetailTarget(null)}  onEdit={()=>{ setEditTarget(detailTarget); setDetailTarget(null); }} onViewUsers={()=>openUsersModal(detailTarget)}/>}

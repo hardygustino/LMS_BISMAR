@@ -54,7 +54,7 @@ interface QuizResults {
 function CoursePills({ courses, selected, onSelect }: { courses: Course[]; selected: number | null; onSelect: (id: number) => void; }) {
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Course</span>
+      <span className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-widest">Kursus</span>
       {courses.map((c) => (
         <button key={c.id_kursus} onClick={() => onSelect(c.id_kursus)}
           className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-all duration-150 ${selected === c.id_kursus ? 'bg-red-600 text-white border-red-600 shadow-md' : 'bg-white dark:bg-[#161b22] text-gray-500 dark:text-gray-400 border-gray-200 dark:border-white/8 hover:border-gray-400 dark:hover:border-white/20 hover:text-gray-700 dark:hover:text-gray-200'}`}>
@@ -350,7 +350,7 @@ function TugasTab({ courses, coursesError, initialCourseId }: { courses: Course[
 
   const handleSave = async () => {
     if (!form.judul_tugas.trim()) { setError('Judul wajib diisi'); return; }
-    if (!editTarget && !selectedCourse) { setError('Pilih course terlebih dahulu'); return; }
+    if (!editTarget && !selectedCourse) { setError('Pilih kursus terlebih dahulu'); return; }
     setLoading(true);
     try {
       const fd = new FormData();
@@ -455,7 +455,7 @@ function TugasTab({ courses, coursesError, initialCourseId }: { courses: Course[
         </div>
       ) : assignments.length === 0 ? (
         <div className="bg-white dark:bg-[#161b22] rounded-3xl border border-gray-100 dark:border-white/8">
-          <EmptyState icon={FileCheck} message="Belum ada tugas" sub="Pilih course lalu buat tugas pertama" />
+          <EmptyState icon={FileCheck} message="Belum ada tugas" sub="Pilih kursus lalu buat tugas pertama" />
         </div>
       ) : (
         <div className="space-y-3">
@@ -602,7 +602,7 @@ function TugasTab({ courses, coursesError, initialCourseId }: { courses: Course[
             <Field label="Nilai">
               <input type="number" min={0} value={gradeForm.nilai} onChange={(e) => setGradeForm({ ...gradeForm, nilai: Number(e.target.value) })} className={inputCls} />
             </Field>
-            <Field label="Feedback">
+            <Field label="Umpan Balik">
               <textarea value={gradeForm.feedback} onChange={(e) => setGradeForm({ ...gradeForm, feedback: e.target.value })} rows={3} placeholder="Catatan untuk peserta..." className={inputCls + ' resize-none'} />
             </Field>
             <div className="flex gap-3 pt-1">
@@ -833,7 +833,7 @@ function KuisTab({ courses, coursesError, initialCourseId }: { courses: Course[]
         </div>
       ) : quizzes.length === 0 ? (
         <div className="bg-white dark:bg-[#161b22] rounded-3xl border border-gray-100 dark:border-white/8">
-          <EmptyState icon={HelpCircle} message="Belum ada kuis" sub="Buat kuis pertama untuk course ini" />
+          <EmptyState icon={HelpCircle} message="Belum ada kuis" sub="Buat kuis pertama untuk kursus ini" />
         </div>
       ) : (
         <div className="space-y-3">
@@ -934,7 +934,7 @@ function KuisTab({ courses, coursesError, initialCourseId }: { courses: Course[]
         <Modal title={editQuiz ? 'Edit Kuis' : 'Kuis Baru'} onClose={() => setShowQuizModal(false)}>
           <div className="space-y-4">
             <Field label="Judul Kuis">
-              <input value={quizForm.judul_kuis} onChange={(e) => setQuizForm({ ...quizForm, judul_kuis: e.target.value })} placeholder="Contoh: Quiz Bab 1" className={inputCls} />
+              <input value={quizForm.judul_kuis} onChange={(e) => setQuizForm({ ...quizForm, judul_kuis: e.target.value })} placeholder="Contoh: Kuis Bab 1" className={inputCls} />
             </Field>
             <div className="grid grid-cols-1 gap-3">
               <Field label="Waktu Mulai">

@@ -19,7 +19,7 @@ interface HeaderProps {
 
 const pageTitles: Record<string, string> = {
   '/dashboard': 'Dashboard',
-  '/courses':   'Courses',
+  '/courses':   'Kursus',
   '/tasks':     'Kuis',
   '/grades':    'Nilai & Progres',
   '/documents': 'Dokumen Saya',

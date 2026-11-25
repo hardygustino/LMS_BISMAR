@@ -232,13 +232,13 @@ export default function TrainerProgress() {
               onClick={() => setViewMode('table')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'table' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}
             >
-              Table
+              Tabel
             </button>
             <button
               onClick={() => setViewMode('grid')}
               className={`px-3 py-1.5 text-sm font-medium rounded-md transition-colors ${viewMode === 'grid' ? 'bg-white dark:bg-[#161b22] text-gray-900 dark:text-white shadow-sm' : 'text-gray-600 dark:text-gray-400'}`}
             >
-              Grid
+              Kartu
             </button>
           </div>
           {!loading && peserta.length > 0 && (
@@ -246,7 +246,7 @@ export default function TrainerProgress() {
               onClick={() => exportCsv(peserta)}
               className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition-colors text-sm"
             >
-              <Download className="w-4 h-4" /> Export CSV
+              <Download className="w-4 h-4" /> Ekspor CSV
             </button>
           )}
         </div>
@@ -265,7 +265,7 @@ export default function TrainerProgress() {
                 <tr className="bg-gray-50 dark:bg-[#161b22] border-b border-gray-200 dark:border-white/10 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   <th className="px-6 py-4">Peserta</th>
                   <th className="px-6 py-4">Kontak & Sekolah</th>
-                  <th className="px-6 py-4">Progress</th>
+                  <th className="px-6 py-4">Progres</th>
                   <th className="px-6 py-4">Status</th>
                   <th className="px-6 py-4 text-right">Aksi</th>
                 </tr>

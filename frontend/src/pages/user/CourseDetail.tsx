@@ -89,7 +89,7 @@ export default function CourseDetail() {
           if (err.response?.status === 403) {
             setFetchError(err.response?.data?.message ?? 'Kamu tidak terdaftar di kursus ini.');
           } else {
-            setFetchError('Gagal memuat kursus. Silakan refresh halaman.');
+            setFetchError('Gagal memuat kursus. Silakan muat ulang halaman.');
           }
         }
       })

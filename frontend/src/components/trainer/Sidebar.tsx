@@ -14,10 +14,10 @@ interface SidebarProps {
 
 const navItems = [
   { name: 'Dashboard',       path: '/trainer/dashboard',   icon: LayoutDashboard },
-  { name: 'Courses',         path: '/trainer/courses',     icon: BookOpen },
+  { name: 'Kursus',         path: '/trainer/courses',     icon: BookOpen },
   { name: 'Tugas & Kuis',    path: '/trainer/assignments', icon: ClipboardList },
   { name: 'Progres Peserta', path: '/trainer/progress',    icon: Users },
-  { name: 'Feedback',        path: '/trainer/feedback',    icon: MessageSquare },
+  { name: 'Umpan Balik',        path: '/trainer/feedback',    icon: MessageSquare },
 ];
 
 export default function TrainerSidebar({ isOpen, setIsOpen }: SidebarProps) {

@@ -38,10 +38,10 @@ const COLORS     = ['#2563eb','#0891b2','#059669','#d97706','#dc2626','#7c3aed',
 
 function exportCSV(recap: RecapData) {
   const rows = [`Rekap Login,,`,`Periode,${recap.period.start} - ${recap.period.end},`,
-    `Total Login,${recap.summary.total_logins},`,`User Unik,${recap.summary.unique_users},`,
+    `Total Login,${recap.summary.total_logins},`,`Pengguna Unik,${recap.summary.unique_users},`,
     ``,`Tanggal,Hari,Jumlah Login`];
   recap.daily_chart.forEach(r => rows.push(`${r.date},${r.day},${r.active_users}`));
-  rows.push(``,`Cabang,Kota,Total Login,User Unik`);
+  rows.push(``,`Cabang,Kota,Total Login,Pengguna Unik`);
   recap.branch_breakdown.forEach(b => rows.push(`"${b.nama_cabang}","${b.kota}",${b.total_logins},${b.unique_users}`));
   const blob = new Blob(['\uFEFF'+rows.join('\n')], { type:'text/csv;charset=utf-8;' });
   const url  = URL.createObjectURL(blob), a = document.createElement('a');
@@ -358,7 +358,7 @@ export default function Dashboard() {
             recap ? (
               <button onClick={() => exportCSV(recap)}
                 className="flex items-center gap-2 px-3.5 py-2 bg-red-600 hover:bg-red-700 text-white text-xs font-bold rounded-lg transition-colors shadow-sm shrink-0">
-                <Download size={12} /> Export CSV
+                <Download size={12} /> Ekspor CSV
               </button>
             ) : null
           }
@@ -446,7 +446,7 @@ export default function Dashboard() {
                   color:'text-primary',                  bg:'bg-muted' },
                 { label:'Total Login', val: recap.summary.total_logins.toLocaleString('id-ID'), val2:'', sub:'kali login',
                   color:'text-blue-600 dark:text-blue-400',    bg:'bg-blue-50/60 dark:bg-blue-500/10' },
-                { label:'User Unik',   val: recap.summary.unique_users.toLocaleString('id-ID'), val2:'', sub:'akun berbeda',
+                { label:'Pengguna Unik',   val: recap.summary.unique_users.toLocaleString('id-ID'), val2:'', sub:'akun berbeda',
                   color:'text-emerald-600 dark:text-emerald-400', bg:'bg-emerald-50/60 dark:bg-emerald-500/10' },
                 { label:'Rata-rata',   val: avgDaily.toLocaleString('id-ID'), val2:'', sub:'login / hari',
                   color:'text-indigo-600 dark:text-indigo-400',  bg:'bg-indigo-50/60 dark:bg-indigo-500/10' },
@@ -505,7 +505,7 @@ export default function Dashboard() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-2">
                     <BarChart2 size={12} className="text-muted" />
-                    <p className="text-[10px] font-bold text-muted uppercase tracking-wider">Breakdown Per Cabang</p>
+                    <p className="text-[10px] font-bold text-muted uppercase tracking-wider">Rincian Per Cabang</p>
                   </div>
                   <span className="text-[10px] text-muted font-medium">{recap.branch_breakdown.length} cabang</span>
                 </div>

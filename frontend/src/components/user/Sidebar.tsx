@@ -21,9 +21,9 @@ interface SidebarProps {
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
-  { name: 'Courses',   path: '/courses',   icon: BookOpen },
+  { name: 'Kursus',   path: '/courses',   icon: BookOpen },
   { name: 'Nilai',     path: '/grades',    icon: Award },
-  { name: 'Feedback',  path: '/feedback',  icon: MessageSquare },
+  { name: 'Umpan Balik',  path: '/feedback',  icon: MessageSquare },
   { name: 'Dokumen',   path: '/documents', icon: FolderOpen },
   { name: 'Profil',    path: '/profile',   icon: User },
 ];

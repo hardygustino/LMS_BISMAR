@@ -20,7 +20,7 @@ class QuizController extends Controller
     {
         $course = Course::findOrFail($courseId);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $quizzes = Quiz::where('id_kursus', $courseId)
@@ -37,7 +37,7 @@ class QuizController extends Controller
 
         $course = Course::findOrFail($quiz->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         return response()->json(['data' => $quiz]);
@@ -56,7 +56,7 @@ class QuizController extends Controller
 
         $course = Course::findOrFail($request->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $quiz = Quiz::create([
@@ -80,7 +80,7 @@ class QuizController extends Controller
 
         $course = Course::findOrFail($quiz->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $effectiveWaktuMulai = $request->waktu_mulai ?? $quiz->waktu_mulai;
@@ -103,7 +103,7 @@ class QuizController extends Controller
             'durasi_menit'  => $request->durasi_menit  ?? $quiz->durasi_menit,
         ]);
 
-        return response()->json(['message' => 'Kuis berhasil diupdate', 'data' => $quiz]);
+        return response()->json(['message' => 'Kuis berhasil diperbarui', 'data' => $quiz]);
     }
 
     // DELETE KUIS
@@ -113,7 +113,7 @@ class QuizController extends Controller
 
         $course = Course::findOrFail($quiz->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         // Hapus jawaban & pilihan per pertanyaan, lalu pertanyaannya
@@ -136,7 +136,7 @@ class QuizController extends Controller
 
         $course = Course::findOrFail($quiz->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([
@@ -196,7 +196,7 @@ class QuizController extends Controller
         $course   = Course::findOrFail($quiz->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([
@@ -236,7 +236,7 @@ class QuizController extends Controller
         }
 
         return response()->json([
-            'message' => 'Pertanyaan berhasil diupdate',
+            'message' => 'Pertanyaan berhasil diperbarui',
             'data'    => $question->load('pilihan'),
         ]);
     }
@@ -248,7 +248,7 @@ class QuizController extends Controller
         $course   = Course::findOrFail($quiz->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         JawabanKuis::where('id_pertanyaan', $question->id_pertanyaan)->delete();
@@ -265,7 +265,7 @@ class QuizController extends Controller
         $course = Course::findOrFail($quiz->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $attempts = AttemptKuis::with(['pengguna', 'jawabanKuis.pertanyaan.pilihanJawaban', 'jawabanKuis.pilihan'])
@@ -320,7 +320,7 @@ class QuizController extends Controller
         $course  = Course::findOrFail($quiz->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $sudahDinilai = JawabanKuis::whereIn('id_jawaban', array_keys($request->scores))

@@ -38,7 +38,7 @@ class ProfileController extends Controller
             ->first();
 
         if (!$user) {
-            return response()->json(['message' => 'User tidak ditemukan'], 404);
+            return response()->json(['message' => 'Pengguna tidak ditemukan'], 404);
         }
 
         return response()->json(['data' => $user]);
@@ -99,9 +99,9 @@ class ProfileController extends Controller
         }
 
         if (empty($updateData) && empty($updatePeserta)) {
-            return response()->json(['message' => 'Tidak ada data yang diupdate'], 400);
+            return response()->json(['message' => 'Tidak ada data yang diperbarui'], 400);
         }
 
-        return response()->json(['message' => 'Profil berhasil diupdate']);
+        return response()->json(['message' => 'Profil berhasil diperbarui']);
     }
 }

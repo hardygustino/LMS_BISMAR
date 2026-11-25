@@ -138,7 +138,7 @@ export function Dashboard() {
             </div>
             <button
               onClick={() => { fetchDashboard(false); setNewActivityCount(0); }}
-              title="Refresh aktivitas"
+              title="Muat ulang aktivitas"
               className="p-1.5 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />

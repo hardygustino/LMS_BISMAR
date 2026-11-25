@@ -148,7 +148,7 @@ class UserController extends Controller
             'ip_address'   => $request->ip(),
         ]); } catch (\Throwable) {}
 
-        return response()->json(['message' => 'User berhasil dibuat.', 'user' => $user], 201);
+        return response()->json(['message' => 'Pengguna berhasil dibuat.', 'user' => $user], 201);
     }
 
     // PUT /superadmin/users/{id}
@@ -198,7 +198,7 @@ class UserController extends Controller
             'ip_address'   => $request->ip(),
         ]); } catch (\Throwable) {}
 
-        return response()->json(['message' => 'User berhasil diupdate.', 'user' => $user]);
+        return response()->json(['message' => 'Pengguna berhasil diperbarui.', 'user' => $user]);
     }
 
     // DELETE /superadmin/users/{id}
@@ -227,7 +227,7 @@ class UserController extends Controller
         $user->tokens()->delete();
 
         $user->delete();
-        return response()->json(['message' => 'User berhasil dihapus.']);
+        return response()->json(['message' => 'Pengguna berhasil dihapus.']);
     }
 
     // PATCH /superadmin/users/{id}/status
@@ -260,7 +260,7 @@ class UserController extends Controller
             'ip_address'   => $request->ip(),
         ]); } catch (\Throwable) {}
 
-        return response()->json(['message' => 'Status user berhasil diubah.']);
+        return response()->json(['message' => 'Status pengguna berhasil diubah.']);
     }
 
     // POST /superadmin/users/bulk-status
@@ -337,7 +337,7 @@ class UserController extends Controller
             'ip_address'   => $request->ip(),
         ]); } catch (\Throwable) {}
 
-        return response()->json(['message' => 'User berhasil dihapus.', 'count' => count($ids)]);
+        return response()->json(['message' => 'Pengguna berhasil dihapus.', 'count' => count($ids)]);
     }
 
     // GET /superadmin/branches (dropdown)

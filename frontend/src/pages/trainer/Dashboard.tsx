@@ -17,7 +17,7 @@ export default function TrainerDashboard() {
   useEffect(() => {
     getCourses()
       .then((res) => setCourses(res.data))
-      .catch(() => setPageError('Gagal memuat data course. Coba refresh halaman.'))
+      .catch(() => setPageError('Gagal memuat data kursus. Coba muat ulang halaman.'))
       .finally(() => setLoading(false));
 
     API.get('/trainer/submissions/pending-count')
@@ -46,7 +46,7 @@ export default function TrainerDashboard() {
           className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
         >
           <Plus size={16} />
-          Buat Course
+          Buat Kursus
         </button>
       </div>
 
@@ -71,9 +71,9 @@ export default function TrainerDashboard() {
           ))
         ) : (
           [
-            { label: 'Total Course',      value: courses.length, icon: BookOpen,       color: 'text-red-500',     bg: 'bg-red-500/10 dark:bg-red-500/10' },
-            { label: 'Published',         value: published,      icon: Globe,          color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
-            { label: 'Draft',             value: draft,          icon: FileText,       color: 'text-amber-500',   bg: 'bg-amber-500/10' },
+            { label: 'Total Kursus',      value: courses.length, icon: BookOpen,       color: 'text-red-500',     bg: 'bg-red-500/10 dark:bg-red-500/10' },
+            { label: 'Terbit',         value: published,      icon: Globe,          color: 'text-emerald-500', bg: 'bg-emerald-500/10' },
+            { label: 'Draf',             value: draft,          icon: FileText,       color: 'text-amber-500',   bg: 'bg-amber-500/10' },
             { label: 'Perlu Dinilai',     value: pendingCount,   icon: ClipboardCheck, color: 'text-purple-500',  bg: 'bg-purple-500/10' },
           ].map((s) => (
             <div
@@ -95,7 +95,7 @@ export default function TrainerDashboard() {
       {/* Course list */}
       <div className="bg-white dark:bg-[#161b22] border border-gray-200 dark:border-white/8 rounded-xl">
         <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100 dark:border-white/6">
-          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Course Saya</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-white text-sm">Kursus Saya</h3>
           <Link
             to="/trainer/courses"
             className="flex items-center gap-1 text-xs text-red-600 hover:text-red-500 font-medium transition-colors"
@@ -119,13 +119,13 @@ export default function TrainerDashboard() {
             <div className="w-12 h-12 bg-gray-100 dark:bg-white/6 rounded-xl flex items-center justify-center mx-auto mb-3">
               <BookOpen size={22} className="text-gray-400" />
             </div>
-            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Belum ada course</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Belum ada kursus</p>
             <button
               onClick={() => navigate('/trainer/courses')}
               className="mt-4 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors"
             >
               <Plus size={15} />
-              Buat Course
+              Buat Kursus
             </button>
           </div>
         ) : (
@@ -138,7 +138,7 @@ export default function TrainerDashboard() {
                 <div className="flex items-center gap-2 mb-3">
                   <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${c.status === 'aktif' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
                   <span className={`text-xs font-medium ${c.status === 'aktif' ? 'text-emerald-500' : 'text-amber-500'}`}>
-                    {c.status === 'aktif' ? 'Published' : 'Draft'}
+                    {c.status === 'aktif' ? 'Terbit' : 'Draf'}
                   </span>
                 </div>
                 <p className="font-semibold text-sm text-gray-800 dark:text-white group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors line-clamp-1 mb-1">

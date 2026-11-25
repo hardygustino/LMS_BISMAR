@@ -74,7 +74,7 @@ export default function Login() {
             {[
               { icon: BookOpen, label: 'Materi pelatihan terstruktur' },
               { icon: Award,    label: 'Evaluasi & sertifikasi digital' },
-              { icon: Users,    label: 'Monitoring progress real-time' },
+              { icon: Users,    label: 'Pantau progres secara real-time' },
             ].map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-3">
                 <div className="w-8 h-8 bg-white/15 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -86,7 +86,7 @@ export default function Login() {
           </div>
 
           <p className="text-red-300/80 text-xs border-t border-white/15 pt-4">
-            © {new Date().getFullYear()} PT Indo Bismar. All rights reserved.
+            © {new Date().getFullYear()} PT Indo Bismar. Hak cipta dilindungi.
           </p>
         </div>
       </div>

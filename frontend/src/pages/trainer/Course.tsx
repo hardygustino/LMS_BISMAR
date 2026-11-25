@@ -73,7 +73,7 @@ export default function TrainerCourses() {
       const res = await getCourses();
       setCourses(res.data);
     } catch {
-      setPageError('Gagal memuat data course. Coba refresh halaman.');
+      setPageError('Gagal memuat data kursus. Coba muat ulang halaman.');
     } finally {
       setPageLoading(false);
     }
@@ -179,14 +179,14 @@ export default function TrainerCourses() {
 
   const handleDelete = (id: number) => {
     openConfirm(
-      'Hapus course ini?',
+      'Hapus kursus ini?',
       async () => {
         setActionId(id);
         try {
           await deleteCourse(id);
           await load();
         } catch {
-          toast.error('Gagal menghapus course. Coba lagi.');
+          toast.error('Gagal menghapus kursus. Coba lagi.');
         } finally {
           setActionId(null);
         }
@@ -197,37 +197,37 @@ export default function TrainerCourses() {
 
   const handlePublish = (id: number) => {
     openConfirm(
-      'Publish course ini?',
+      'Terbitkan kursus ini?',
       async () => {
         setActionId(id);
         try {
           await publishCourse(id);
           await load();
         } catch {
-          toast.error('Gagal mempublish course. Coba lagi.');
+          toast.error('Gagal menerbitkan kursus. Coba lagi.');
         } finally {
           setActionId(null);
         }
       },
-      { sub: 'Course akan langsung terlihat oleh semua peserta.', confirmLabel: 'Publish', variant: 'success' }
+      { sub: 'Kursus akan langsung terlihat oleh semua peserta.', confirmLabel: 'Terbitkan', variant: 'success' }
     );
   };
 
   const handleUnpublish = (id: number) => {
     openConfirm(
-      'Kembalikan ke Draft?',
+      'Kembalikan ke Draf?',
       async () => {
         setActionId(id);
         try {
           await unpublishCourse(id);
           await load();
         } catch {
-          toast.error('Gagal mengubah status course. Coba lagi.');
+          toast.error('Gagal mengubah status kursus. Coba lagi.');
         } finally {
           setActionId(null);
         }
       },
-      { sub: 'Course tidak akan terlihat oleh peserta.', confirmLabel: 'Ya, ke Draft', variant: 'warning' }
+      { sub: 'Kursus tidak akan terlihat oleh peserta.', confirmLabel: 'Ya, ke Draf', variant: 'warning' }
     );
   };
 
@@ -284,11 +284,11 @@ export default function TrainerCourses() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Kelola Course</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Kelola Kursus</h1>
           {pageLoading ? (
             <div className="h-4 w-32 rounded bg-gray-200 dark:bg-white/8 animate-pulse mt-1.5" />
           ) : (
-            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{courses.length} course ditemukan</p>
+            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{courses.length} kursus ditemukan</p>
           )}
         </div>
         <button
@@ -296,7 +296,7 @@ export default function TrainerCourses() {
           className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
         >
           <Plus size={18} />
-          Tambah Course
+          Tambah Kursus
         </button>
       </div>
 
@@ -349,7 +349,7 @@ export default function TrainerCourses() {
       ) : courses.length === 0 ? (
         <div className={`${cardCls} p-16 text-center`}>
           <BookOpen size={40} className="mx-auto mb-3 text-gray-400 dark:text-gray-500" />
-          <p className="text-gray-500 dark:text-gray-400">Belum ada course. Buat yang pertama!</p>
+          <p className="text-gray-500 dark:text-gray-400">Belum ada kursus. Buat yang pertama!</p>
         </div>
       ) : (
         <div className={`${cardCls} overflow-hidden`}>
@@ -407,7 +407,7 @@ export default function TrainerCourses() {
                         : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
                     }`}>
                       {c.status === 'aktif' && <Check size={12} />}
-                      {c.status === 'aktif' ? 'Published' : 'Draft'}
+                      {c.status === 'aktif' ? 'Terbit' : 'Draf'}
                     </span>
                   </td>
                   <td className="px-5 py-4">
@@ -423,7 +423,7 @@ export default function TrainerCourses() {
                         <button
                           onClick={() => handlePublish(c.id_kursus)}
                           disabled={actionId === c.id_kursus}
-                          title="Publish"
+                          title="Terbitkan"
                           className="p-2 text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition-colors disabled:opacity-50"
                         >
                           {actionId === c.id_kursus
@@ -434,7 +434,7 @@ export default function TrainerCourses() {
                         <button
                           onClick={() => handleUnpublish(c.id_kursus)}
                           disabled={actionId === c.id_kursus}
-                          title="Kembalikan ke Draft"
+                          title="Kembalikan ke Draf"
                           className="p-2 text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg transition-colors disabled:opacity-50"
                         >
                           {actionId === c.id_kursus
@@ -469,16 +469,16 @@ export default function TrainerCourses() {
 
       {showModal && (
         <Modal
-          title={editTarget ? 'Edit Course' : 'Tambah Course Baru'}
+          title={editTarget ? 'Edit Kursus' : 'Tambah Kursus Baru'}
           onClose={handleCloseModal}
         >
           <div className="space-y-4">
             <div>
-              <label className={labelCls}>Judul Course</label>
+              <label className={labelCls}>Judul Kursus</label>
               <input
                 value={form.judul_kursus}
                 onChange={(e) => setForm({ ...form, judul_kursus: e.target.value })}
-                placeholder="Masukkan judul course"
+                placeholder="Masukkan judul kursus"
                 className={inputCls}
               />
             </div>
@@ -487,7 +487,7 @@ export default function TrainerCourses() {
               <textarea
                 value={form.deskripsi}
                 onChange={(e) => setForm({ ...form, deskripsi: e.target.value })}
-                placeholder="Deskripsi course..."
+                placeholder="Deskripsi kursus..."
                 rows={3}
                 className={`${inputCls} resize-none`}
               />
@@ -495,12 +495,12 @@ export default function TrainerCourses() {
 
             {/* Upload Gambar */}
             <div>
-              <label className={labelCls}>Gambar Preview Course</label>
+              <label className={labelCls}>Gambar Pratinjau Kursus</label>
               {imagePreview ? (
                 <div className="relative w-full">
                   <img
                     src={imagePreview}
-                    alt="Preview gambar course"
+                    alt="Pratinjau gambar kursus"
                     className="w-full h-44 object-cover rounded-xl border border-gray-200 dark:border-white/10"
                     onError={() => setImagePreview(null)}
                   />

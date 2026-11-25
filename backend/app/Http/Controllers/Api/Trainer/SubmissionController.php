@@ -19,7 +19,7 @@ class SubmissionController extends Controller
         $course     = Course::findOrFail($assignment->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $submissions = Submission::where('id_tugas', $assignmentId)
@@ -56,7 +56,7 @@ class SubmissionController extends Controller
         $course     = Course::findOrFail($assignment->id_kursus);
 
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([

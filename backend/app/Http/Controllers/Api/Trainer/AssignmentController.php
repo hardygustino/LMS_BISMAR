@@ -28,7 +28,7 @@ class AssignmentController extends Controller
     {
         $course = Course::findOrFail($id);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $assignments = Assignment::where('id_kursus', $id)->get();
@@ -52,7 +52,7 @@ class AssignmentController extends Controller
 
         $course = Course::findOrFail($request->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $filePath = null;
@@ -81,7 +81,7 @@ class AssignmentController extends Controller
 
         $course = Course::findOrFail($assignment->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         $request->validate([
@@ -106,7 +106,7 @@ class AssignmentController extends Controller
         $assignment->save();
 
         return response()->json([
-            'message' => 'Tugas berhasil diupdate',
+            'message' => 'Tugas berhasil diperbarui',
             'data'    => $this->formatAssignment($assignment),
         ]);
     }
@@ -117,7 +117,7 @@ class AssignmentController extends Controller
 
         $course = Course::findOrFail($assignment->id_kursus);
         if ($course->id_trainer !== $request->user()->id_pengguna) {
-            return response()->json(['message' => 'Unauthorized'], 403);
+            return response()->json(['message' => 'Anda tidak memiliki akses.'], 403);
         }
 
         Submission::where('id_tugas', $assignment->id_tugas)->each(function ($sub) {

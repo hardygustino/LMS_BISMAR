@@ -12,7 +12,7 @@ class EnsureIsPeserta
         $user = $request->user();
 
         if (! $user) {
-            return response()->json(['message' => 'Unauthenticated.'], 401);
+            return response()->json(['message' => 'Sesi tidak valid. Silakan login terlebih dahulu.'], 401);
         }
 
         if ((int) $user->id_role !== 4) {

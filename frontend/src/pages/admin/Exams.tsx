@@ -171,7 +171,7 @@ export function Exams() {
     try {
       const res = await api.getSubmissions(id);
       setSubmissions(s => ({ ...s, [id]: res.data }));
-    } catch { toast.error('Gagal memuat submissions.'); }
+    } catch { toast.error('Gagal memuat pengumpulan.'); }
     finally { setLoadingSub(null); }
   };
 
@@ -480,7 +480,7 @@ export function Exams() {
                   <input type="number" min={0} max={100} className={tugasInputCls} value={gradeForm.nilai} onChange={e => setGradeForm(f => ({ ...f, nilai: e.target.value }))} placeholder="cth: 85" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Feedback</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Umpan Balik</label>
                   <textarea rows={3} className={tugasInputCls + ' resize-none'} value={gradeForm.feedback} onChange={e => setGradeForm(f => ({ ...f, feedback: e.target.value }))} placeholder="Catatan untuk peserta..." />
                 </div>
               </div>

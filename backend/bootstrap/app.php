@@ -32,14 +32,14 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (AuthenticationException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'message' => 'Unauthenticated. Silakan login terlebih dahulu.'
+                    'message' => 'Sesi tidak valid. Silakan login terlebih dahulu.'
                 ], 401);
             }
         });
         $exceptions->render(function (RouteNotFoundException $e, $request) {
             if ($request->is('api/*')) {
                 return response()->json([
-                    'message' => 'Unauthenticated. Silakan login terlebih dahulu.'
+                    'message' => 'Sesi tidak valid. Silakan login terlebih dahulu.'
                 ], 401);
             }
         });

@@ -6,10 +6,10 @@ import api from '../../api/axiosInstance';
 
 const pageTitles: Record<string, string> = {
   '/trainer/dashboard':   'Dashboard',
-  '/trainer/courses':     'Courses',
+  '/trainer/courses':     'Kursus',
   '/trainer/assignments': 'Tugas & Kuis',
   '/trainer/progress':    'Progres Peserta',
-  '/trainer/feedback':    'Feedback',
+  '/trainer/feedback':    'Umpan Balik',
 };
 
 interface Notif {
@@ -49,7 +49,7 @@ export default function TrainerHeader({ onMenuClick }: HeaderProps) {
 
   const title =
     pageTitles[pathname] ??
-    (pathname.includes('/materials') ? 'Materi Course' : 'Trainer Panel');
+    (pathname.includes('/materials') ? 'Materi Kursus' : 'Trainer Panel');
 
   useEffect(() => {
     api.get('/trainer/notifications')

@@ -53,7 +53,7 @@ export default function UserFeedback() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Feedback Saya</h1>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Umpan Balik Saya</h1>
         <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Catatan dan feedback dari trainer</p>
       </div>
 

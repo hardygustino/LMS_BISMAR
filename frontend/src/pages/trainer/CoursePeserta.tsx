@@ -160,14 +160,14 @@ export default function TrainerCoursePeserta() {
           <ArrowLeft size={18} />
         </Link>
         <div>
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Course / Peserta</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mb-0.5">Kursus / Peserta</p>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{course?.judul_kursus}</h1>
           <span className={`inline-flex items-center mt-1.5 text-xs font-semibold px-2.5 py-0.5 rounded-full ${
             course?.status === 'publish'
               ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
               : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
           }`}>
-            {course?.status === 'publish' ? 'Published' : 'Draft'}
+            {course?.status === 'publish' ? 'Terbit' : 'Draf'}
           </span>
         </div>
       </div>
